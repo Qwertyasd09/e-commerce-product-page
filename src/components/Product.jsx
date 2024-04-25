@@ -85,7 +85,7 @@ export const Product = ({
           <ul className='sections-mobile'>
             <img onClick={() => setModalMobile(false)} className='btn-close-mobile' src={icons.iconCloseMobile}></img>
             {sections.map(section => {
-              return <a key={crypto.randomUUID()} href=''>{ section }</a>
+              return <a aria-label={section} key={crypto.randomUUID()} href=''>{ section }</a>
             })}
           </ul>
         </div>
@@ -105,12 +105,12 @@ export const Product = ({
                 />}
 
       <div className='left'>
-        <img onClick={handlePreviousPopUp} className='mobile popup-btn previous' src={icons.iconPrevious}></img>
-        <img onClick={handleNextPopUp} className='mobile popup-btn next' src={icons.iconNext}></img>
-        <img onClick={() => setModal(true)} className='current-img' src={productImg.img[index]}></img>
+        <img alt='Previous button' onClick={handlePreviousPopUp} className='mobile popup-btn previous' src={icons.iconPrevious}></img>
+        <img alt='Next button' onClick={handleNextPopUp} className='mobile popup-btn next' src={icons.iconNext}></img>
+        <img alt='Current image being displayed' onClick={() => setModal(true)} className='current-img' src={productImg.img[index]}></img>
         <div className='thumbnails'>
           {productImg.thumbnails.map((thumbnail, index) => {
-            return <div key={crypto.randomUUID()} className={`border-container${active === index ? ' active' : ''}`}><img data-index={index} onClick={handleClickThumbnail} className={`images${active === index ? ' active' : ''}`} src={thumbnail}></img></div>
+            return <div key={crypto.randomUUID()} className={`border-container${active === index ? ' active' : ''}`}><img alt='Image of thumbnail of the product' data-index={index} onClick={handleClickThumbnail} className={`images${active === index ? ' active' : ''}`} src={thumbnail}></img></div>
           })}
         </div>
       </div>
@@ -125,11 +125,11 @@ export const Product = ({
         
         <div className='payment-info'>
           <div className='amount'>
-            <button onClick={handleMinusProduct} className='btn-minus'><img style={{backgroundColor: 'red'}} src={icons.iconMinus}></img></button>
+            <button aria-label='Minus button' onClick={handleMinusProduct} className='btn-minus'><img alt='Minus icon' style={{backgroundColor: 'red'}} src={icons.iconMinus}></img></button>
             <p className='number-items'>{count}</p>
-            <button onClick={() => setCount(prevCount => prevCount + 1)} className='btn-plus'><img src={icons.iconPlus}></img></button>
+            <button aria-label='Plus button' onClick={() => setCount(prevCount => prevCount + 1)} className='btn-plus'><img alt='Plus icon' src={icons.iconPlus}></img></button>
           </div>
-          <button onClick={handleCheckout} className='add-to-car'><img className='icon-cart' src={icons.iconCart}></img>Add to cart</button>
+          <button onClick={handleCheckout} className='add-to-car'><img alt='Cart icon of add to cart button' className='icon-cart' src={icons.iconCart}></img>Add to cart</button>
         </div>
       </div>
     </main>

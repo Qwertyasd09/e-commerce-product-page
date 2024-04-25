@@ -14,11 +14,11 @@ export const Navbar = ({
   return (
     <nav>
         <div className='left'>
-            <img onClick={handleIconMenu} className='icon-menu' src={iconMenu}></img>
-            <a href='' className='logo'><img src={ logo }/></a>
+            <img alt='Icon menu in mobile design' onClick={handleIconMenu} className='icon-menu' src={iconMenu}></img>
+            <a aria-label='Logo of page' href='' className='logo'><img alt='Logo of page' src={ logo }/></a>
             <ul className='sections'>
                 {sections.map(section => {
-                  return <a key={crypto.randomUUID()} href=''>{ section }</a>
+                  return <li key={crypto.randomUUID()}><a aria-label={section} href=''>{ section }</a></li>
                 })}
             </ul>
         </div>
@@ -28,8 +28,8 @@ export const Navbar = ({
             <div className="semicircle left"></div>
             <div className="semicircle right"></div>
           </div>}
-          <img onClick={() => setCheckout(!checkout)} className='cart-icon' src={ cartSvgNav } alt='Cart icon' />
-          <img className='profile-icon' src={ userImg } alt='Profile Image'/>
+          <img alt='Cart icon' onClick={() => setCheckout(!checkout)} className='cart-icon' src={ cartSvgNav } />
+          <img alt='Profile Image' className='profile-icon' src={ userImg } />
         </div>
     </nav>
   )
