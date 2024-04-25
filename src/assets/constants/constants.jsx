@@ -1,6 +1,7 @@
 import iconCartNavBar from '../images/icon-cart-nav.svg';
 import iconCart from '../images/icon-cart.svg'
 import iconClose from '../images/icon-close.svg';
+import iconCloseMobile from '../images/icon-close-mobile.svg';
 import iconDelete from '../images/icon-delete.svg';
 import iconMenu from '../images/icon-menu.svg';
 import iconMinus from '../images/icon-minus.svg';
@@ -16,6 +17,7 @@ export const icons = {
     iconCartNavBar,
     iconCart,
     iconClose,
+    iconCloseMobile,
     iconDelete,
     iconMenu,
     iconMinus,

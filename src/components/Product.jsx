@@ -22,7 +22,10 @@ export const Product = ({
   productImg, 
   product, 
   setCheckout, 
-  checkout 
+  checkout,
+  sections,
+  modalMobile,
+  setModalMobile
 }) => {
 
   const [index, setIndex] = useState(0);
@@ -54,6 +57,18 @@ export const Product = ({
     }
   }
 
+  const handleNextPopUp = (e) => {
+    e.stopPropagation();
+    if (index === 3) return setIndex(0), setActive(0);
+    return setIndex(prevIndex => prevIndex + 1), setActive(prevActive => prevActive + 1);
+  }
+
+  const handlePreviousPopUp = (e) => {
+    e.stopPropagation();
+    if (index === 0) return setIndex(3), setActive(3);
+    return setIndex(prevIndex => prevIndex - 1), setActive(prevActive => prevActive - 1);
+  }
+
   return (
     <main>
       {checkout && <Checkout
@@ -65,6 +80,17 @@ export const Product = ({
         checkoutAmount={checkoutAmount}
       />}
       
+      {modalMobile && <div className="layout">
+        <div className="sidebar-mobile">
+          <ul className='sections-mobile'>
+            <img onClick={() => setModalMobile(false)} className='btn-close-mobile' src={icons.iconCloseMobile}></img>
+            {sections.map(section => {
+              return <a key={crypto.randomUUID()} href=''>{ section }</a>
+            })}
+          </ul>
+        </div>
+      </div>}
+
       {modal && <PopUp 
                   productImg={productImg} 
                   setIndex={setIndex}
@@ -74,13 +100,17 @@ export const Product = ({
                   handleClickPopUp={handleClickPopUp}
                   setActive={setActive}
                   active={active}
+                  handleNextPopUp={handleNextPopUp}
+                  handlePreviousPopUp={handlePreviousPopUp}
                 />}
 
       <div className='left'>
+        <img onClick={handlePreviousPopUp} className='mobile popup-btn previous' src={icons.iconPrevious}></img>
+        <img onClick={handleNextPopUp} className='mobile popup-btn next' src={icons.iconNext}></img>
         <img onClick={() => setModal(true)} className='current-img' src={productImg.img[index]}></img>
         <div className='thumbnails'>
           {productImg.thumbnails.map((thumbnail, index) => {
-            return <div className={`border-container${active === index ? ' active' : ''}`}><img data-index={index} key={index} onClick={handleClickThumbnail} className={`images${active === index ? ' active' : ''}`} src={thumbnail}></img></div>
+            return <div key={crypto.randomUUID()} className={`border-container${active === index ? ' active' : ''}`}><img data-index={index} onClick={handleClickThumbnail} className={`images${active === index ? ' active' : ''}`} src={thumbnail}></img></div>
           })}
         </div>
       </div>
@@ -88,8 +118,11 @@ export const Product = ({
         <h3 className='company'>{ product.name }</h3>
         <h2 className='title'>{ product.title }</h2>
         <p className='description'>{ product.description }</p>
-        <p className='current-price'>${ displayFloat(product.price.currentPrice) } <span className='discount'>{ product.price.discount }%</span></p>
-        <p className='old-price'>${ calculateOriginalPrice(product.price.currentPrice, product.price.discount) }</p>
+        <div className="price">
+          <p className='current-price'>${ displayFloat(product.price.currentPrice) } <span className='discount'>{ product.price.discount }%</span></p>
+          <p className='old-price'>${ calculateOriginalPrice(product.price.currentPrice, product.price.discount) }</p>
+        </div>
+        
         <div className='payment-info'>
           <div className='amount'>
             <button onClick={handleMinusProduct} className='btn-minus'><img style={{backgroundColor: 'red'}} src={icons.iconMinus}></img></button>
